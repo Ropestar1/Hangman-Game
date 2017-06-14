@@ -8,7 +8,7 @@ var arrWordBank = ["piggy", "hello", "world"];
 var arrWrongLetters = [];
 var arrCorrectLetters = [];
 
-var selectedWord = arrWordBank[0]; //make this random later
+var selectedWord = "";
 var winCount = 0;
 var lossCount = 0;
 var guessCount = 0;
@@ -26,7 +26,7 @@ console.log("guessCount", guessCount);
 
 //function definitions
 function gameStart() {
-	document.onkeyup = function gameStart() {
+	document.onkeyup = function gameStartText() {
 		//console.log(event.key);
 		var startInsert = document.getElementById("starter");
 		startInsert.innerHTML = startText;
@@ -36,21 +36,31 @@ function gameStart() {
 
 	guessCount = guessCountInitial; 
 	console.log("guessCount", guessCount);
+
+	selectedWord = arrWordBank[0]; //make this random later
+	console.log(selectedWord);
 }
 
 function gamePlay() {
-	var userGuess = prompt("Guess a letter.");
+	//fix below code to register variable
+	document.onkeyup = function playing() {
+		var userGuess = event.key;
+
+		for (var i = 0; i < selectedWord.length; i++) {
+			
+		}
+	}
 	//userGuess check against the selected word
 }
 
 //conditionals
 if (winCount === 0 && lossCount === 0 && guessCount === 0){
 	gameStart();
-}		
+}	
 
-// else if (arrWrongLetters.length === 0 && arrCorrectLetters.length === 0 && guessCount ===  guessCountInitial) {
-// 	gamePlay();
-// }
+else if (arrWrongLetters.length === 0 && arrCorrectLetters.length === 0 && guessCount ===  guessCountInitial) {
+	gamePlay();
+}
 
 
 
