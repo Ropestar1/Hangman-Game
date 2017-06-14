@@ -1,31 +1,60 @@
 //opening codes to start-initialize the game
-//Initial arrays and variables. Resets at game over.
-var arrSelectedWord = ["piggy"];
-var arrLetterBank = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+//Initial global arrays and variables. Resets at game over.
+var startText = "Game on!";
+
+var arrWordBank = ["piggy", "hello", "world"];
+//var arrLetterBank = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var arrWrongLetters = [];
 var arrCorrectLetters = [];
 
+var selectedWord = arrWordBank[0]; //make this random later
 var winCount = 0;
 var lossCount = 0;
 var guessCount = 0;
+var guessCountInitial = 7; //come back and set to factor depending on word
 
-console.log("arrSelectedWord", arrSelectedWord);
-console.log("arrGuessedWord", arrGuessedLetters);
+console.log("arrWordBank", arrWordBank);
+//console.log("arrLetterBank", arrLetterBank);
 console.log("arrWrongLetters", arrWrongLetters);
 console.log("arrCorrectedLetters", arrCorrectLetters);
+
+console.log("selectedWord", selectedWord);
 console.log("winCount", winCount);
 console.log("lossCount", lossCount);
 console.log("guessCount", guessCount);
 
-
-//document.getElementById("starter").onkeypress = function() {gameStart()};
-if (winCount === 0 && lossCount === 0 && guessCount === 0){
+//function definitions
+function gameStart() {
 	document.onkeyup = function gameStart() {
-		console.log(event.key);
-
-		var startText = document.getElementById("starter");
-		startText.innerHTML = "Game on!";
+		//console.log(event.key);
+		var startInsert = document.getElementById("starter");
+		startInsert.innerHTML = startText;
 		}
 
-else if ()
+	guessCount = guessCountInitial; 
+	console.log("guessCount", guessCount);
 }
+
+function gamePlay() {
+	var userGuess = prompt("Guess a letter.");
+	//userGuess check against the selected word
+}
+
+//conditionals
+if (winCount === 0 && lossCount === 0 && guessCount === 0){
+	gameStart();
+}		
+
+else if (arrWrongLetters.length === 0 && arrCorrectLetters.length === 0 && guessCount ===  guessCountInitial) {
+	gamePlay();
+}
+
+
+
+
+
+
+
+
+
+
