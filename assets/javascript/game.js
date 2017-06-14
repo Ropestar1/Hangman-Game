@@ -46,12 +46,19 @@ function gamePlay() {
 	document.onkeyup = function playing() {
 		var userGuess = event.key;
 
+		//rethink below code
 		for (var i = 0; i < selectedWord.length; i++) {
+			if (userGuess === selectedWord[i]) {
+
+			}
+			else
 			
 		}
 	}
 	//userGuess check against the selected word
 }
+
+
 
 //conditionals
 if (winCount === 0 && lossCount === 0 && guessCount === 0){
