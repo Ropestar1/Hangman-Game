@@ -1,7 +1,8 @@
-//opening codes to start-initialize the game
-//Initial global arrays and variables. Resets at game over.
+//Initial text to start game (clean start)
 var startText = "Game on!";
+var instructionText = "Instructions"
 
+//Initial global arrays and variables. Resets at game over.
 var arrWordBank = ["piggy", "hello", "world"];
 //var arrLetterBank = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var arrWrongLetters = [];
@@ -29,7 +30,9 @@ function gameStart() {
 		//console.log(event.key);
 		var startInsert = document.getElementById("starter");
 		startInsert.innerHTML = startText;
-		}
+
+		//add code to change visibility of instructions
+	}
 
 	guessCount = guessCountInitial; 
 	console.log("guessCount", guessCount);
@@ -45,9 +48,9 @@ if (winCount === 0 && lossCount === 0 && guessCount === 0){
 	gameStart();
 }		
 
-else if (arrWrongLetters.length === 0 && arrCorrectLetters.length === 0 && guessCount ===  guessCountInitial) {
-	gamePlay();
-}
+// else if (arrWrongLetters.length === 0 && arrCorrectLetters.length === 0 && guessCount ===  guessCountInitial) {
+// 	gamePlay();
+// }
 
 
 
