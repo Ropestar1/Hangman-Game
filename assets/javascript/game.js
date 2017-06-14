@@ -1,10 +1,18 @@
 //opening codes to start-initialize the game
-document.onkeyup = function(event) {
-	//console.log(event.key)
+gameStart();
 
-};
+function gameStart(anyKey) {
+	//creates empty arrays
+	var arrSelectedWord = ["piggy"];
+	var arrGuessedLetters = [];
+	var arrWrongLetters = [];
+	var arrCorrectLetters = [];
 
-function(keyPressed) {
-	
+	console.log("arrSelectedWord", arrSelectedWord);
+	console.log("arrGuessedWord", arrGuessedLetters);
+	console.log("arrWrongLetters", arrWrongLetters);
+	console.log("arrCorrectedLetters", arrCorrectLetters);
+	// function gamePlay(userLetters) {
+
+	// }
 }
-
