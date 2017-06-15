@@ -10,15 +10,24 @@ var arrWrongLetters = [];
 var arrCorrectLetters = [];
 var arrSelectedWordBlanks = [];
 
+//removes duplications in array
+var wrongLetterDisplay = console.log(arrWrongLetters.filter( (el, i, arr) => arr.indexOf(el) === i));
+var guessReducer = arrWrongLetters.filter( (el, i, arr) => arr.indexOf(el) === i).length;
+
 var selectedWord = "";
 var placeholder = "_"; //insert into selectedWord x times
 var userGuess = "";
 
 var winCount = 0;
 var lossCount = 0;
-var guessCount = 6;
+var guessCountInitial = 6;
+var guessCountLeft = guessCountInitial;
 
 //function definitions
+function ticker() {
+	guessCountLeft = guessCountInitial - wrongLetterDisplay.length; 
+}
+
 function gameStart() {
 	document.onkeydown = function gameStartText(event) {
 		//console.log(event.key);
@@ -55,40 +64,19 @@ function gamePlay() {
 		userGuess = event.key.toLowerCase();//add the lowercase function here
 		console.log("userGuess", userGuess);
 
-		//add code to remove duplicate letters in array letter banks (exlcluding selected word)
-
-
-		//remove duplications arrays
-
+		//removes duplications in array
+		arrCorrectLetters.filter( (el, i, arr) => arr.indexOf(el) === i);
 
 		//gameplay code below
-		if (arrSelectedWordLetters.length > 0) {//
+		if (arrSelectedWordLetters.length > 0) {//looking if a word has been chosen
 			for (var i = 0; i < arrSelectedWordLetters.length; i++) {
 				if (userGuess === arrSelectedWordLetters[i]) { //if correct letter entered
 					arrSelectedWordBlanks[i] = userGuess; //replace placeholder with letter
 					arrCorrectLetters.push(userGuess);
 				}
 				else {
-					arrWrongLetters.push(userGuess);//need to fix this 
+					arrWrongLetters.push(userGuess);
 				}
-
-
-					//trying to clean arrays
-					// for (var j = 0; j < arrCorrectLetters.length; j++) {
-					// 	if (userGuess === arrCorrectLetters[j]) {
-					// 		console.log(userGuess);
-					// 	}
-					// 	else {
-					// 		arrCorrectLetters.push(userGuess);
-					// 		for (var k = 0; k < selectedWord.length; k++) {
-					// 			if (userGuess === selectedWord[k]) {
-					// 				arrSelectedWordBlanks[k] = userGuess;
-					// 			}
-					// 		}
-					// 	}
-					// }
-				//}
-				//else (user)//START ON THIS CODE!!!
 			}
 		}
 
@@ -112,13 +100,20 @@ function gamePlay() {
 	
 }
 
+
+
 //conditionals
-if (winCount === 0 && lossCount === 0 && guessCount === 6){
+if (guessReducer > 6) {//maybe use this as when
+	//add code to display game over, press any key to continue
+	gameStart();
+}
+
+else if	(winCount === 0 && lossCount === 0 && guessCountLeft === 6) {
 	gameStart();
 	gamePlay();
 }	
 
-else if (arrWrongLetters.length === 0 && arrCorrectLetters.length === 0 && guessCount === 0) {
+else if (arrWrongLetters.length === 0 && arrCorrectLetters.length === 0 && guessCountLeft === 0) {
 	gamePlay();
 }
 
