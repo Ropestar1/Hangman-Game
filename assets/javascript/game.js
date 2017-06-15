@@ -1,18 +1,12 @@
 //Initial text to start game (clean start)
 var startText = "Game on!";
-var instructionText = "Instructions"
+var instructionText = "Instructions";
 
 //Initial global arrays and variables. Resets at game over.
-var arrWordBank = ["castles", "hello", "world"];
-var arrSelectedWordLetters = []; //houses letters to avoid duplication;
+var arrWordBank = ["castles", "hello", "world", "building", "crying", "sleepless", "tired"];
 //var arrLetterBank = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var arrWrongLetters = [];
 var arrCorrectLetters = [];
-var arrSelectedWordBlanks = [];
-
-//removes duplications in array - FIGURE OUT WHY THIS PART ISN'T GIVING A STORED OUTPUT VALUE!!!!
-var wrongLetterDisplay = arrWrongLetters.filter( (el, i, arr) => arr.indexOf(el) === i);
-var guessReducer = arrWrongLetters.filter( (el, i, arr) => arr.indexOf(el) === i).length;
 
 var selectedWord = "";
 var placeholder = "_"; //insert into selectedWord x times
@@ -22,14 +16,22 @@ var winCount = 0;
 var lossCount = 0;
 var guessCountInitial = 6;
 var guessCountLeft = guessCountInitial;
+var guessReducer = 0;
 
 //function definitions
 function ticker() {
 	guessCountLeft = guessCountInitial - wrongLetterDisplay.length; 
 }
 
+//removes duplications in arrays
+function arrayCleaner() {
+	arrWrongLetters.filter( (el, i, arr) => arr.indexOf(el) === i);//not working?
+	guessReducer = arrWrongLetters.filter( (el, i, arr) => arr.indexOf(el) === i).length + 1;//works
+	//corrects missing first key not counted at initialization, but what about a reset??????? should it be removed?
+}
+
 function gameStart() {
-	document.onkeydown = function gameStartText(event) {
+	document.onkeyup = function gameStartText(event) {
 		//console.log(event.key);
 		var startInsert = document.getElementById("starter");
 		startInsert.innerHTML = startText;
@@ -42,8 +44,7 @@ function gameStart() {
 
 	//puts letters and underscores into array
 	for (var i = 0; i < selectedWord.length; i++) {
-		arrSelectedWordBlanks.push(placeholder);//works: pushes underscores to array
-		arrSelectedWordLetters.push(selectedWord[i]);
+		arrCorrectLetters.push(placeholder);//works: pushes underscores to array
 	}
 
 	//check if letters are duplicated
@@ -64,17 +65,16 @@ function gamePlay() {
 		userGuess = event.key.toLowerCase();//add the lowercase function here
 		console.log("userGuess", userGuess);
 
-		//removes duplications in array
-		arrCorrectLetters.filter( (el, i, arr) => arr.indexOf(el) === i);
+		//removes duplications in array - SEEMS TO BE BROKEN
+		arrayCleaner();
 
 		//gameplay code below
-		if (arrSelectedWordLetters.length > 0) {//looking if a word has been chosen
-			for (var i = 0; i < arrSelectedWordLetters.length; i++) {
-				if (userGuess === arrSelectedWordLetters[i]) { //if correct letter entered
-					arrSelectedWordBlanks[i] = userGuess; //replace placeholder with letter
-					arrCorrectLetters.push(userGuess);
+		if (selectedWord.length > 0) {//looking if a word has been chosen
+			for (var i = 0; i < selectedWord.length; i++) {
+				if (userGuess === selectedWord[i]) { //if correct letter entered
+					arrCorrectLetters[i] = userGuess; //replace placeholder with letter
 				}
-				else {
+				else { //HOW DO I PREVENT CORRECT LETTERS FROM GETTING THROWN INTO THE WRONG LETTERS?
 					arrWrongLetters.push(userGuess);
 				}
 			}
@@ -103,19 +103,25 @@ function gamePlay() {
 
 
 //conditionals
-if (guessReducer > 6) {//maybe use this as when
-	//add code to display game over, press any key to continue
-	gameStart();
-}
+// if (guessReducer > 5) {
+// 	//add html code to display YOU LOSE, press any key to continue
+// 	gameStart();
+// 	//add a game reset function
+// }
 
-else if	(winCount === 0 && lossCount === 0 && guessCountLeft === 6) {
+// else if (winCount >= 0 && lossCount >= 0 && guessReducer < 6) {
+// 	gamePlay();
+// }
+
+//FIND THE CORRECT CONDITIONS TO START AND PLAY GAME!!!!!
+if (winCount === 0 && lossCount === 0 && guessCountLeft === 6) {
 	gameStart();
 	gamePlay();
 }	
 
-else if (arrWrongLetters.length === 0 && arrCorrectLetters.length === 0 && guessCountLeft === 0) {
+else if (arrWrongLetters.length === 0 && selectedWord.length === 0 && guessCountLeft === 0) {
 	gamePlay();
 }
 
-//console.log testing:
-//console.log(arrSelectedWordBlanks);
+//console.log() testing below
+// console.log(arrCorrectLetters)
