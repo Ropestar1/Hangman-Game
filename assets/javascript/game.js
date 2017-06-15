@@ -12,14 +12,15 @@ var arrSelectedWordBlanks = [];
 
 var selectedWord = "";
 var placeholder = "_"; //insert into selectedWord x times
+var userGuess = "";
+
 var winCount = 0;
 var lossCount = 0;
-var guessCount = 0;
-var guessCountInitial = 6; //allows programmer to change if needed in one location
+var guessCount = 6;
 
 //function definitions
 function gameStart() {
-	document.onkeydown = function gameStartText(event) {//can I leave event out of the argument, so it's just blank?
+	document.onkeydown = function gameStartText(event) {
 		//console.log(event.key);
 		var startInsert = document.getElementById("starter");
 		startInsert.innerHTML = startText;
@@ -27,16 +28,12 @@ function gameStart() {
 		//add code to change visibility of instructions. See index.html
 	}
 
-	guessCount = guessCountInitial; 
-	console.log("guessCount", guessCount);
-
 	selectedWord = arrWordBank[0]; //make this random later
-	console.log(selectedWord);	
+	//console.log(selectedWord);	
 
-	//puts letters into an array to check for duplication
+	//puts letters and underscores into array
 	for (var i = 0; i < selectedWord.length; i++) {
 		arrSelectedWordBlanks.push(placeholder);//works: pushes underscores to array
-
 		arrSelectedWordLetters.push(selectedWord[i]);
 	}
 
@@ -55,19 +52,43 @@ function gameStart() {
 function gamePlay() {
 	//fix below code to register variable
 	document.onkeyup = function letterTracker(event) {
-		var userGuess = event.key.toLowerCase();//add the lowercase function here
+		userGuess = event.key.toLowerCase();//add the lowercase function here
 		console.log("userGuess", userGuess);
 
-		if (arrSelectedWordLetters.length === 0) {
-			gameStart();
-		}
+		//add code to remove duplicate letters in array letter banks (exlcluding selected word)
 
-		else if (arrSelectedWordLetters.length > 0) {
+
+		//remove duplications arrays
+
+
+		//gameplay code below
+		if (arrSelectedWordLetters.length > 0) {//
 			for (var i = 0; i < arrSelectedWordLetters.length; i++) {
-				if (userGuess === arrSelectedWordLetters[i]) {
-				arrCorrectLetters.push(userGuess); //DOUBLE CHECK IT GOES WHERE I WANT IT TO.
+				if (userGuess === arrSelectedWordLetters[i]) { //if correct letter entered
+					arrSelectedWordBlanks[i] = userGuess; //replace placeholder with letter
+					arrCorrectLetters.push(userGuess);
 				}
-				else (user)//START ON THIS CODE!!!
+				else {
+					arrWrongLetters.push(userGuess);//need to fix this 
+				}
+
+
+					//trying to clean arrays
+					// for (var j = 0; j < arrCorrectLetters.length; j++) {
+					// 	if (userGuess === arrCorrectLetters[j]) {
+					// 		console.log(userGuess);
+					// 	}
+					// 	else {
+					// 		arrCorrectLetters.push(userGuess);
+					// 		for (var k = 0; k < selectedWord.length; k++) {
+					// 			if (userGuess === selectedWord[k]) {
+					// 				arrSelectedWordBlanks[k] = userGuess;
+					// 			}
+					// 		}
+					// 	}
+					// }
+				//}
+				//else (user)//START ON THIS CODE!!!
 			}
 		}
 
@@ -91,16 +112,15 @@ function gamePlay() {
 	
 }
 
-
-
 //conditionals
-if (winCount === 0 && lossCount === 0 && guessCount === 0){
+if (winCount === 0 && lossCount === 0 && guessCount === 6){
 	gameStart();
+	gamePlay();
 }	
 
-else if (arrWrongLetters.length === 0 && arrCorrectLetters.length === 0 && guessCount ===  guessCountInitial) {
+else if (arrWrongLetters.length === 0 && arrCorrectLetters.length === 0 && guessCount === 0) {
 	gamePlay();
 }
 
 //console.log testing:
-console.log(arrSelectedWordBlanks);
+//console.log(arrSelectedWordBlanks);
