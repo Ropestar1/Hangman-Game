@@ -10,8 +10,8 @@ var arrWrongLetters = [];
 var arrCorrectLetters = [];
 var arrSelectedWordBlanks = [];
 
-//removes duplications in array
-var wrongLetterDisplay = console.log(arrWrongLetters.filter( (el, i, arr) => arr.indexOf(el) === i));
+//removes duplications in array - FIGURE OUT WHY THIS PART ISN'T GIVING A STORED OUTPUT VALUE!!!!
+var wrongLetterDisplay = arrWrongLetters.filter( (el, i, arr) => arr.indexOf(el) === i);
 var guessReducer = arrWrongLetters.filter( (el, i, arr) => arr.indexOf(el) === i).length;
 
 var selectedWord = "";
