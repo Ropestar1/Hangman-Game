@@ -21,7 +21,10 @@ var guessReducer = 0;
 
 //function definitions
 function ticker() {
-	guessCountLeft = guessCountInitial - wrongLetterDisplay.length;
+	guessCountLeft = guessCountInitial - arrWrongLetters.length;
+	
+	var guessesLeftInsert = document.getElementById("guesses-left");
+	guessesLeftInsert.innerHTML = guessCountLeft;
 }
 
 function reset() {
@@ -32,7 +35,7 @@ function underscore() {
 	//work out conditions for underscoring
 	if (winCount === 0 && lossCount === 0 && guessCountLeft === 6 && selectedWord.length === 0) {
 
-		selectedWord = arrWordBank[0]; //MAKE THIS RANDOM!!!!!
+		selectedWord = arrWordBank[Math.floor(Math.random() * arrWordBank.length)]; //MAKE THIS RANDOM!!!!!
 
 		for (var i = 0; i < selectedWord.length; i++) {
 		arrCorrectLetters.push(placeholder);
@@ -40,15 +43,18 @@ function underscore() {
 	}
 }
 
+function display() {
+	var displayLetters = document.getElementById("correct-letters");
+	displayLetters.innerHTML = arrCorrectLetters.join(" "); // check
+}
+
 function gameStart() {
 	document.onkeydown = function gameStartText(event) {
-		//console.log(event.key);
-		var startInsert = document.getElementById("starter");
-		correctLetters.innerHTML = document.getElementById("correct-letters");
-
-		startInsert.innerHTML = startText;
-		
 		underscore();
+		display();
+
+		var startInsert = document.getElementById("starter");
+		startInsert.innerHTML = startText;		
 	}
 }
 
@@ -60,17 +66,22 @@ function gamePlay() {
 		console.log("userGuess", userGuess);
 
 		//gameplay code below
-		if (selectedWord.length > 0) {//looking if a word has been chosen
+		if (selectedWord.length > 0) {//looking if a word has been picked
 			if (selectedWord.indexOf(userGuess) === -1) {
 					arrWrongLetters.push(userGuess);
 			}
 
 			else if (selectedWord.indexOf(userGuess) >= 0) { //if correct letter entered
 				for (var i = 0; i < selectedWord.length; i++) {
-					arrCorrectLetters[i] = userGuess; //replace placeholder with letter
+					if (userGuess === selectedWord[i]) {
+						arrCorrectLetters[i] = userGuess;
+						display();
+					}
 				}
 			}
 		}
+
+		ticker();
 	}
 }
 
