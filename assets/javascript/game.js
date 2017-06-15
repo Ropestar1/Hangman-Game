@@ -3,31 +3,23 @@ var startText = "Game on!";
 var instructionText = "Instructions"
 
 //Initial global arrays and variables. Resets at game over.
-var arrWordBank = ["piggy", "hello", "world"];
+var arrWordBank = ["castles", "hello", "world"];
 var arrSelectedWordLetters = []; //houses letters to avoid duplication;
 //var arrLetterBank = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var arrWrongLetters = [];
 var arrCorrectLetters = [];
+var arrSelectedWordBlanks = [];
 
 var selectedWord = "";
+var placeholder = "_"; //insert into selectedWord x times
 var winCount = 0;
 var lossCount = 0;
 var guessCount = 0;
 var guessCountInitial = 6; //allows programmer to change if needed in one location
 
-console.log("arrWordBank", arrWordBank);
-//console.log("arrLetterBank", arrLetterBank);
-console.log("arrWrongLetters", arrWrongLetters);
-console.log("arrCorrectedLetters", arrCorrectLetters);
-
-console.log("selectedWord", selectedWord);
-console.log("winCount", winCount);
-console.log("lossCount", lossCount);
-console.log("guessCount", guessCount);
-
 //function definitions
 function gameStart() {
-	document.onkeyup = function gameStartText() {
+	document.onkeydown = function gameStartText(event) {//can I leave event out of the argument, so it's just blank?
 		//console.log(event.key);
 		var startInsert = document.getElementById("starter");
 		startInsert.innerHTML = startText;
@@ -39,21 +31,14 @@ function gameStart() {
 	console.log("guessCount", guessCount);
 
 	selectedWord = arrWordBank[0]; //make this random later
-	console.log(selectedWord);
+	console.log(selectedWord);	
 
 	//puts letters into an array to check for duplication
 	for (var i = 0; i < selectedWord.length; i++) {
-		if (arrSelectedWordLetters.length === 0) {
-			arrSelectedWordLetters.push(selectedWord[0]);
-		}
+		arrSelectedWordBlanks.push(placeholder);//works: pushes underscores to array
 
-		//START HERE AGAIN
-		else if () {	
 		arrSelectedWordLetters.push(selectedWord[i]);
-		console.log("selectedWordLetters", selectedWordLetters);
-		//ABOVE START AGAIN
 	}
-
 
 	//check if letters are duplicated
 	// for (var j = 0; j < selectedWordLetters.length; i++) {
@@ -69,9 +54,22 @@ function gameStart() {
 
 function gamePlay() {
 	//fix below code to register variable
-	document.onkeyup = function letterTracker() {
+	document.onkeyup = function letterTracker(event) {
 		var userGuess = event.key.toLowerCase();//add the lowercase function here
-		// console.log("userGuess", userGuess);
+		console.log("userGuess", userGuess);
+
+		if (arrSelectedWordLetters.length === 0) {
+			gameStart();
+		}
+
+		else if (arrSelectedWordLetters.length > 0) {
+			for (var i = 0; i < arrSelectedWordLetters.length; i++) {
+				if (userGuess === arrSelectedWordLetters[i]) {
+				arrCorrectLetters.push(userGuess); //DOUBLE CHECK IT GOES WHERE I WANT IT TO.
+				}
+				else (user)//START ON THIS CODE!!!
+			}
+		}
 
 		//rethink below code?
 		//userGuess checks against the selected word
@@ -104,12 +102,5 @@ else if (arrWrongLetters.length === 0 && arrCorrectLetters.length === 0 && guess
 	gamePlay();
 }
 
-
-
-
-
-
-
-
-
-
+//console.log testing:
+console.log(arrSelectedWordBlanks);
