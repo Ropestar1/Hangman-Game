@@ -40,7 +40,7 @@ function underscore() {
 
 function display() {
 	var displayLetters = document.getElementById("correct-letters");
-	displayLetters.innerHTML = arrCorrectLetters.join(" ");
+	displayLetters.innerHTML = arrCorrectLetters.join(" ").toUpperCase();
 }
 
 function gameStart() {
@@ -82,11 +82,11 @@ function gamePlay() {
 		console.log("userGuess", userGuess);
 
 		if (selectedWord.length > 0) {//looking if a word has been picked
-			if (selectedWord.indexOf(userGuess) === -1 && alphabet.indexOf(userGuess) >= 0) {
+			if (selectedWord.indexOf(userGuess) === -1 && alphabet.indexOf(userGuess) >= 0 && arrWrongLetters.indexOf(userGuess) === -1) {
 				arrWrongLetters.push(userGuess);
 
 				var displayWrongLetters = document.getElementById("wrong-letters");
-				displayWrongLetters.innerHTML = arrWrongLetters.join(", ");
+				displayWrongLetters.innerHTML = arrWrongLetters.join(", ").toUpperCase();
 			}
 
 			else if (selectedWord.indexOf(userGuess) >= 0) { //if correct letter entered
