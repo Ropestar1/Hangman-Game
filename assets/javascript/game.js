@@ -1,23 +1,22 @@
-//Initial text to start game (clean start)
-var startText = "Game on!";
-var correctLetters = "";
 
 //Initial global arrays and variables. Resets at game over.
+var alphabet = "abcdefghijklmnopqrstuvwyz"; //makes sure a letter is used for game tallies
+var startText = "Game on!";
+var resetText = "Press any key to start a new game."
+var correctLetters = "";
+var selectedWord = "";
+var placeholder = "_";
+var userGuess = "";
+
 var arrWordBank = ["dragons", "castle", "fortress", "knights", "crying", "sleepless", "tired"];
 var arrWrongLetters = [];
-
 var arrCorrectLetters = [];
-
-var selectedWord = "";
-var placeholder = "_"; //insert into selectedWord x times
-var userGuess = "";
 
 var winCount = 0;
 var lossCount = 0;
 var guessCountInitial = 6;
 var guessCountLeft = guessCountInitial;
 var guessReducer = 0;
-
 
 //function definitions
 function ticker() {
@@ -31,7 +30,7 @@ function ticker() {
 function underscore() {
 	if (winCount === 0 && lossCount === 0 && guessCountLeft === 6 && selectedWord.length === 0) {
 
-		selectedWord = arrWordBank[Math.floor(Math.random() * arrWordBank.length)]; //MAKE THIS RANDOM!!!!!
+		selectedWord = arrWordBank[Math.floor(Math.random() * arrWordBank.length)];
 
 		for (var i = 0; i < selectedWord.length; i++) {
 		arrCorrectLetters.push(placeholder);
@@ -78,18 +77,16 @@ function gameOverNotice() {
 }
 
 function gamePlay() {
-	//fix below code to register variable
 	document.onkeyup = function letterTracker(event) {
-		userGuess = event.key.toLowerCase();//add the lowercase function here
+		userGuess = event.key.toLowerCase();
 		console.log("userGuess", userGuess);
 
-		//gameplay code below
 		if (selectedWord.length > 0) {//looking if a word has been picked
-			if (selectedWord.indexOf(userGuess) === -1) {
+			if (selectedWord.indexOf(userGuess) === -1 && alphabet.indexOf(userGuess) >= 0) {
 				arrWrongLetters.push(userGuess);
 
 				var displayWrongLetters = document.getElementById("wrong-letters");
-				displayWrongLetters.innerHTML = arrWrongLetters.join(" ");
+				displayWrongLetters.innerHTML = arrWrongLetters.join(", ");
 			}
 
 			else if (selectedWord.indexOf(userGuess) >= 0) { //if correct letter entered
@@ -112,14 +109,21 @@ function reset() {
 	arrCorrectLetters = [];
 
 	selectedWord = arrWordBank[Math.floor(Math.random() * arrWordBank.length)];
+	for (var i = 0; i < selectedWord.length; i++) {
+		arrCorrectLetters.push(placeholder);
+	}
 
 	var guessCountInitial = 6;
-	// var guessReducer = 0;
 
-	var startInsert = document.getElementById("starter");
-	startInsert.innerHTML = startText;
+	var resetInsert = document.getElementById("starter");
+	resetInsert.innerHTML = resetText;
+
+	var resetWrongLetters = document.getElementById("wrong-letters");
+	resetWrongLetters.innerHTML = " ";
 
 	guessReducer = 0;
+
+	display();
 }
 
 if (winCount === 0 && lossCount === 0 && guessCountLeft === 6 && selectedWord.length === 0) {
