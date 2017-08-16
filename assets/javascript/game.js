@@ -8,7 +8,7 @@ var selectedWord = "";
 var placeholder = "_";
 var userGuess = "";
 
-var arrWordBank = ["dragons", "castle", "fortress", "knights", "crying", "sleepless", "tired"];
+var arrWordBank = ["dragons", "castle", "fortress", "knights", "queen", "sword", "armor"];
 var arrWrongLetters = [];
 var arrCorrectLetters = [];
 

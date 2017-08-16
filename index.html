@@ -12,19 +12,36 @@
 </head>
 
 <body>
+	<header class="navbar navbar-default">
+	  <div class="container">
+	  	<div class="row">
+	  		<div class="col-md-6 col-md-offset-3">
+					<h1 class="text-center">Hangman: Fantasy Theme</h1>
+				</div>
+	    </div>
+	  </div>
+	</header>
 
-	<h1>Hangman: Fantasy Theme</h1>
-	<h2 id="starter">Ready to guess the word?</h2>
-
-	<h3 id="correct-letters">Press any letter key to begin.</h3>
-
-	<h3>Letters Guessed:<br><span id="wrong-letters"></span></h3>
-
-	<ul>
-		<li>Wins: <span id="win-count">0</span></li>
-		<li>Losses: <span id="loss-count">0</span></li>
-		<li>Guesses Remaining: <span id="guesses-left">6</span></li>
-	</ul>
+	<section class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="text-center" id="starter">Ready to guess the word?</h2>
+				<h3 class="text-center" id="correct-letters">Press any letter key to begin.</h3>
+				<h3 class="text-center">Letters Guessed:<br><span id="wrong-letters"></span></h3>
+				<div class="row">
+					<div class=col-md-4>
+						<p class="text-center" id="win-text">Wins:<br><span id="win-count">0</span></p>
+					</div>
+					<div class=col-md-4>
+						<p class="text-center" id="loss-text">Losses:<br><span id="loss-count">0</span></p>
+					</div>
+					<div class=col-md-4>
+						<p class="text-center" id="guess-text">Guesses Remaining:<br><span id="guesses-left">6</span></li>
+					</div>			
+				</div>
+			</div>
+		</div>
+	</section>
 
 	<script type="text/javascript" src="assets/javascript/game.js"></script>
 </body>
