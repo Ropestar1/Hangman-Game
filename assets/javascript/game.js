@@ -1,14 +1,14 @@
 
 //Initial global arrays and variables. Resets at game over.
-var alphabet = "abcdefghijklmnopqrstuvwxyz"; //makes sure a letter is used for game tallies
-var startText = "Game on!";
-var resetText = "Press any key to start a new game."
-var correctLetters = "";
-var selectedWord = "";
-var placeholder = "_";
-var userGuess = "";
+var alphabet = 'abcdefghijklmnopqrstuvwxyz'; //makes sure a letter is used for game tallies
+var startText = 'Game on!';
+var resetText = 'Press any key to start a new game.'
+var correctLetters = '';
+var selectedWord = '';
+var placeholder = '_';
+var userGuess = '';
 
-var arrWordBank = ["dragons", "castle", "fortress", "knights", "queen", "sword", "armor"];
+var arrWordBank = ['dragons', 'castle', 'towers', 'knights', 'queen', 'sword', 'armor', 'army', 'king'];
 var arrWrongLetters = [];
 var arrCorrectLetters = [];
 
@@ -22,7 +22,7 @@ var guessReducer = 0;
 function ticker() {
 	guessCountLeft = guessCountInitial - arrWrongLetters.length;
 	
-	var guessesLeftInsert = document.getElementById("guesses-left");
+	var guessesLeftInsert = document.getElementById('guesses-left');
 	guessesLeftInsert.innerHTML = guessCountLeft;
 	gameOverNotice();
 }
@@ -39,35 +39,37 @@ function underscore() {
 }
 
 function display() {
-	var displayLetters = document.getElementById("correct-letters");
-	displayLetters.innerHTML = arrCorrectLetters.join(" ").toUpperCase();
+	var displayLetters = document.getElementById('correct-letters');
+	displayLetters.innerHTML = arrCorrectLetters.join(' ').toUpperCase();
 }
 
 function gameStart() {
 	underscore();
 	display();
 	document.onkeydown = function gameStartText(event) {
-		var startInsert = document.getElementById("starter");
+		var startInsert = document.getElementById('starter');
 		startInsert.innerHTML = startText;
 	}
 }
 
 function gameOverNotice() {
 	if (guessCountLeft === 0) {
-		alert("You lost!");
+
+		alert('You lost!');
 		lossCount++;
 
-		var lossInsert = document.getElementById("loss-count");
+		var lossInsert = document.getElementById('loss-count');
  		lossInsert.innerHTML = lossCount;
 
  		reset();
 	}
 	
-	else if(arrCorrectLetters.length > 0 && arrWrongLetters.length > 0 && arrCorrectLetters.join("") === selectedWord) {
- 		alert("You win! Great job!");
+	else if(arrCorrectLetters.length > 0 && arrWrongLetters.length > 0 && arrCorrectLetters.join('') === selectedWord) {
+
+ 		alert('You win! Great job!');
  		winCount++;
 
- 		var winInsert = document.getElementById("win-count");
+ 		var winInsert = document.getElementById('win-count');
  		winInsert.innerHTML = winCount;
 
  		reset();
@@ -77,14 +79,15 @@ function gameOverNotice() {
 function gamePlay() {
 	document.onkeyup = function letterTracker(event) {
 		userGuess = event.key.toLowerCase();
-		console.log("userGuess", userGuess);
+		console.log('userGuess', userGuess);
 
 		if (selectedWord.length > 0) {//looking if a word has been picked
 			if (selectedWord.indexOf(userGuess) === -1 && alphabet.indexOf(userGuess) >= 0 && arrWrongLetters.indexOf(userGuess) === -1) {
 				arrWrongLetters.push(userGuess);
 
-				var displayWrongLetters = document.getElementById("wrong-letters");
-				displayWrongLetters.innerHTML = arrWrongLetters.join(", ").toUpperCase();
+				var displayWrongLetters = document.getElementById('wrong-letters');
+				displayWrongLetters.innerHTML = arrWrongLetters.join(', ').toUpperCase();
+				ticker();
 			}
 
 			else if (selectedWord.indexOf(userGuess) >= 0) { //if correct letter entered
@@ -92,11 +95,12 @@ function gamePlay() {
 					if (userGuess === selectedWord[i]) {
 						arrCorrectLetters[i] = userGuess;
 						display();
+						ticker();
 					}
 				}
 			}
 		}
-		ticker();
+		
 	}
 }
 
@@ -109,13 +113,13 @@ function reset() {
 		arrCorrectLetters.push(placeholder);
 	}
 
-	var resetInsert = document.getElementById("starter");
+	var resetInsert = document.getElementById('starter');
 	resetInsert.innerHTML = resetText;
 
-	var resetWrongLetters = document.getElementById("wrong-letters");
-	resetWrongLetters.innerHTML = " ";
+	var resetWrongLetters = document.getElementById('wrong-letters');
+	resetWrongLetters.innerHTML = ' ';
 
-	var resetGuesses = document.getElementById("guesses-left");
+	var resetGuesses = document.getElementById('guesses-left');
 	resetGuesses.innerHTML = guessCountInitial;
 
 	guessReducer = 0;
