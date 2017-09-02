@@ -24,7 +24,7 @@ function ticker() {
 	
 	var guessesLeftInsert = document.getElementById("guesses-left");
 	guessesLeftInsert.innerHTML = guessCountLeft;
-	//note to self: I'm running an innerHTML function on the element-by-id, and inserting a new value.
+	gameOverNotice();
 }
 
 function underscore() {
@@ -55,7 +55,6 @@ function gameStart() {
 
 function gameOverNotice() {
 	if (guessCountLeft === 0) {
-		//need to fix because there is a +1 added; I can add one to display"cheat"
 		alert("You lost!");
 		lossCount++;
 
@@ -65,7 +64,7 @@ function gameOverNotice() {
  		reset();
 	}
 	
-	else (arrCorrectLetters.join("") === selectedWord) {
+	else if(arrCorrectLetters.length > 0 && arrWrongLetters.length > 0 && arrCorrectLetters.join("") === selectedWord) {
  		alert("You win! Great job!");
  		winCount++;
 
@@ -98,8 +97,6 @@ function gamePlay() {
 				}
 			}
 		}
-
-		gameOverNotice();
 		ticker();
 	}
 }
@@ -112,8 +109,6 @@ function reset() {
 	for (var i = 0; i < selectedWord.length; i++) {
 		arrCorrectLetters.push(placeholder);
 	}
-
-	var guessCountInitial = 6;
 
 	var resetInsert = document.getElementById("starter");
 	resetInsert.innerHTML = resetText;
