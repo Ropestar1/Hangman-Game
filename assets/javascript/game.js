@@ -1,6 +1,6 @@
 
 //Initial global arrays and variables. Resets at game over.
-var alphabet = "abcdefghijklmnopqrstuvwyz"; //makes sure a letter is used for game tallies
+var alphabet = "abcdefghijklmnopqrstuvwxyz"; //makes sure a letter is used for game tallies
 var startText = "Game on!";
 var resetText = "Press any key to start a new game."
 var correctLetters = "";
@@ -44,10 +44,9 @@ function display() {
 }
 
 function gameStart() {
+	underscore();
+	display();
 	document.onkeydown = function gameStartText(event) {
-		underscore();
-		display();
-
 		var startInsert = document.getElementById("starter");
 		startInsert.innerHTML = startText;
 	}
@@ -115,6 +114,9 @@ function reset() {
 
 	var resetWrongLetters = document.getElementById("wrong-letters");
 	resetWrongLetters.innerHTML = " ";
+
+	var resetGuesses = document.getElementById("guesses-left");
+	resetGuesses.innerHTML = guessCountInitial;
 
 	guessReducer = 0;
 
