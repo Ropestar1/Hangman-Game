@@ -54,23 +54,23 @@ function gameStart() {
 }
 
 function gameOverNotice() {
-	if (arrCorrectLetters.join("") === selectedWord) {
- 		alert("You win! Great job!");
- 		winCount++;
-
- 		var winInsert = document.getElementById("win-count");
- 		winInsert.innerHTML = winCount;
-
- 		reset();
-	}
-
-	else if (guessCountLeft === 0) {
+	if (guessCountLeft === 0) {
 		//need to fix because there is a +1 added; I can add one to display"cheat"
 		alert("You lost!");
 		lossCount++;
 
 		var lossInsert = document.getElementById("loss-count");
  		lossInsert.innerHTML = lossCount;
+
+ 		reset();
+	}
+	
+	else (arrCorrectLetters.join("") === selectedWord) {
+ 		alert("You win! Great job!");
+ 		winCount++;
+
+ 		var winInsert = document.getElementById("win-count");
+ 		winInsert.innerHTML = winCount;
 
  		reset();
 	}
