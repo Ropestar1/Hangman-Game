@@ -1,4 +1,20 @@
-
 ul {
 	list-style: none;
+}
+
+#win-panel-heading {
+	background-color: lime;
+}
+
+#loss-panel-heading {
+	background-color: #cc0000;
+}
+
+/* BOOTSTRAP OVERRIDES */
+.panel-title {
+	font-size: 30px;
+}
+
+.panel-body {
+	font-size: 28px;
 }

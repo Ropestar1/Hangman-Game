@@ -55,7 +55,7 @@ function gameStart() {
 function gameOverNotice() {
 	if (guessCountLeft === 0) {
 
-		alert('You lost!');
+		alert('You lost! The word is \"' + selectedWord.toUpperCase() +'\". Better luck next time!');
 		lossCount++;
 
 		var lossInsert = document.getElementById('loss-count');
@@ -66,7 +66,7 @@ function gameOverNotice() {
 	
 	else if(arrCorrectLetters.length > 0 && arrWrongLetters.length > 0 && arrCorrectLetters.join('') === selectedWord) {
 
- 		alert('You win! Great job!');
+ 		alert('You win! Great job guessing \"' + selectedWord.toUpperCase() + '\"!');
  		winCount++;
 
  		var winInsert = document.getElementById('win-count');
