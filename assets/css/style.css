@@ -2,6 +2,10 @@ ul {
 	list-style: none;
 }
 
+#heading-title {
+	color: white;
+}
+
 #win-panel-heading {
 	background-color: lime;
 }
